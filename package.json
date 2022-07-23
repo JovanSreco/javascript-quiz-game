@@ -1,0 +1,14 @@
+{
+  "name": "quiz-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "watch:sass": "sass sass/main.scss css/style.css -w"
+  },
+  "author": "Jovan Sreco",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.54.0"
+  }
+}

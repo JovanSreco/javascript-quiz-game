@@ -1,0 +1,100 @@
+.quiz {
+    width: 60rem;
+    padding: 2rem;
+    text-align: center;
+    border: 3px solid rgba($color-main, 0.4);
+    background-color: $color-white;
+    color: $color-black-light;
+    border-radius: 1rem;
+    @include box-shadow;
+
+
+    &__heading {
+        margin-bottom: $margin-bottom-large;
+
+        h1 {
+            font-size: 4rem;
+            letter-spacing: 1.4px;
+            margin-bottom: $margin-bottom-large;
+        }
+        p { 
+            font-size: 2.6rem;
+            letter-spacing: 1px;
+            color: $color-main;
+            font-weight: 600;
+        }
+    }
+
+    &__question-info {
+        margin-bottom: $margin-bottom-large;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        @media screen and (max-width: 420px) {
+            display: block;
+        }
+    }
+
+    
+    &__current-question, &__current-score {
+        & > * {
+            font-size: 2rem;
+        }
+        
+        & span:nth-child(1) {
+            margin-bottom: 1rem;
+            display: block;
+        }   
+    
+        & span:nth-child(2) {
+            display: inline-block;
+            background-color: $color-main;
+            padding: 1.5rem;
+            color: $color-secondary;
+            border-radius: 10rem;
+            @include box-shadow;
+        }
+    }
+
+    &__current-question{
+        @media screen and (max-width: 420px) {
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__question {
+        margin: 0 1.2rem;
+        margin-bottom: $margin-bottom-large;
+        font-size: 2rem;
+        text-align: left;
+    }
+
+    &__answers {
+        margin-bottom: $margin-bottom-large;
+    }
+
+    &__wl-message {
+        display: none;
+        margin: 0 auto;
+        margin-bottom: $margin-bottom-large;
+        max-width: 80%;
+        padding: 1rem 0;
+        text-align: center;
+        border-radius: 5rem;
+        font-size: 2.5rem;
+        color: $color-white;
+
+        &.success, &.faliure {
+            display: block;
+        }
+
+        &.success {
+            background-color: $color-success;
+        }
+
+        &.faliure {
+            background-color: $color-faliure;
+        }
+    }
+    
+}

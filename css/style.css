@@ -1,0 +1,197 @@
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*, *::after, *::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Karla", sans-serif;
+}
+
+.btn {
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+.btn--group {
+  width: 100%;
+  font-size: 1.8rem;
+  padding-left: 2rem;
+  text-align: left;
+  background: rgb(195, 240, 255);
+  color: rgb(40, 40, 40);
+}
+.btn--group:hover {
+  background: rgb(65, 145, 235);
+  color: rgb(240, 240, 240);
+}
+.btn--group:active {
+  background: rgb(195, 240, 255);
+  color: rgb(40, 40, 40);
+}
+.btn--new-game, .btn--next {
+  width: 15rem;
+  height: 4rem;
+  border-radius: 10rem;
+  background-color: rgb(65, 145, 235);
+  box-shadow: 0 1rem 2rem rgba(40, 40, 40, 0.2);
+  color: rgb(240, 240, 240);
+  font-size: 1.85rem;
+  text-align: center;
+  transition: all 200ms ease-in-out;
+}
+.btn--new-game:hover, .btn--next:hover {
+  transform: translateY(-0.5rem) scale(1.06);
+  box-shadow: 0 1.6rem 3rem rgba(40, 40, 40, 0.2);
+}
+.btn--new-game:active, .btn--next:active {
+  transform: translateY(0) scale(1.06);
+}
+.btn--new-game {
+  margin-right: 1rem;
+}
+.btn--new-game.hide {
+  display: none;
+}
+@media screen and (max-width: 420px) {
+  .btn--new-game {
+    margin-right: 0;
+  }
+}
+
+.button-group {
+  height: 4rem;
+  margin: 1rem;
+  background-color: rgb(225, 242, 255);
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+}
+.button-group__option {
+  width: 4rem;
+  color: rgb(240, 240, 240);
+  background-color: rgb(65, 145, 235);
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-game-restart-group {
+  margin-bottom: 2.25rem;
+}
+
+.container {
+  width: 100vw;
+  background-color: rgb(225, 242, 255);
+  min-height: 100vh;
+  padding: 1rem 3rem 3rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container.faliure {
+  background-color: rgb(245, 135, 145);
+}
+.container.success {
+  background-color: rgb(138, 243, 162);
+}
+
+.quiz {
+  width: 60rem;
+  padding: 2rem;
+  text-align: center;
+  border: 3px solid rgba(65, 145, 235, 0.4);
+  background-color: rgb(240, 240, 240);
+  color: rgb(40, 40, 40);
+  border-radius: 1rem;
+  box-shadow: 0 1rem 2rem rgba(40, 40, 40, 0.2);
+}
+.quiz__heading {
+  margin-bottom: 2.25rem;
+}
+.quiz__heading h1 {
+  font-size: 4rem;
+  letter-spacing: 1.4px;
+  margin-bottom: 2.25rem;
+}
+.quiz__heading p {
+  font-size: 2.6rem;
+  letter-spacing: 1px;
+  color: rgb(65, 145, 235);
+  font-weight: 600;
+}
+.quiz__question-info {
+  margin-bottom: 2.25rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+@media screen and (max-width: 420px) {
+  .quiz__question-info {
+    display: block;
+  }
+}
+.quiz__current-question > *, .quiz__current-score > * {
+  font-size: 2rem;
+}
+.quiz__current-question span:nth-child(1), .quiz__current-score span:nth-child(1) {
+  margin-bottom: 1rem;
+  display: block;
+}
+.quiz__current-question span:nth-child(2), .quiz__current-score span:nth-child(2) {
+  display: inline-block;
+  background-color: rgb(65, 145, 235);
+  padding: 1.5rem;
+  color: rgb(225, 242, 255);
+  border-radius: 10rem;
+  box-shadow: 0 1rem 2rem rgba(40, 40, 40, 0.2);
+}
+@media screen and (max-width: 420px) {
+  .quiz__current-question {
+    margin-bottom: 1rem;
+  }
+}
+.quiz__question {
+  margin: 0 1.2rem;
+  margin-bottom: 2.25rem;
+  font-size: 2rem;
+  text-align: left;
+}
+.quiz__answers {
+  margin-bottom: 2.25rem;
+}
+.quiz__wl-message {
+  display: none;
+  margin: 0 auto;
+  margin-bottom: 2.25rem;
+  max-width: 80%;
+  padding: 1rem 0;
+  text-align: center;
+  border-radius: 5rem;
+  font-size: 2.5rem;
+  color: rgb(240, 240, 240);
+}
+.quiz__wl-message.success, .quiz__wl-message.faliure {
+  display: block;
+}
+.quiz__wl-message.success {
+  background-color: rgb(138, 243, 162);
+}
+.quiz__wl-message.faliure {
+  background-color: rgb(245, 135, 145);
+}
+
+/*# sourceMappingURL=style.css.map */

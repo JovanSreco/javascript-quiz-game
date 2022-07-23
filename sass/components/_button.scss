@@ -1,0 +1,89 @@
+
+.btn {
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+      
+
+    &--group {
+        width: 100%;
+        font-size: 1.8rem;
+        padding-left: 2rem;
+        text-align: left;
+        background: $color-tertiary;
+        color: $color-black-light;
+
+        &:hover{
+            background: $color-main;
+            color: $color-white;
+        }
+    
+        &:active {
+            background: $color-tertiary;
+            color: $color-black-light;
+        }
+    }
+
+    &--new-game, &--next {
+        width: 15rem;
+        height: 4rem;
+        border-radius: 10rem;
+        background-color: $color-main;
+        @include box-shadow;
+        color: $color-white;
+        font-size: 1.85rem;
+        text-align: center;
+        transition: all 200ms ease-in-out;
+        &:hover {
+            transform: translateY(-0.5rem) scale(1.06);
+            box-shadow: 0 1.6rem 3rem rgba($color-black-light, 0.2);
+        }
+
+        &:active {
+            transform: translateY(0) scale(1.06);
+        }
+
+    }
+
+    &--new-game {
+        margin-right: 1rem;
+        &.hide {
+            display: none;
+        }
+        @media screen and (max-width: 420px) {
+            margin-right: 0;
+        }
+    }
+
+    // &--next {
+
+    // }
+}
+
+.button-group {
+    height: 4rem;
+    margin: $margin-bottom-small;
+    background-color: $color-secondary;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+
+    
+    &__option{
+        width: 4rem;
+        color: $color-white;
+        background-color: $color-main;
+        font-size: 2rem;
+        @include flex-center;
+    }
+}
+
+.new-game-restart-group {
+    margin-bottom: $margin-bottom-large;
+}

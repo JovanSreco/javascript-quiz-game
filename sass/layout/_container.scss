@@ -1,0 +1,15 @@
+.container {
+    width: 100vw;
+    background-color: $color-secondary;
+    min-height: 100vh;
+    padding: 1rem 3rem 3rem 3rem;
+    @include flex-center;
+
+    &.faliure {
+        background-color: $color-faliure;
+    }
+
+    &.success {
+        background-color: $color-success;
+    }
+}
