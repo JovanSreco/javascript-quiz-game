@@ -103,10 +103,10 @@ body {
   justify-content: center;
 }
 .container.faliure {
-  background-color: rgb(245, 135, 145);
+  background-color: rgb(246, 152, 160);
 }
 .container.success {
-  background-color: rgb(138, 243, 162);
+  background-color: rgb(143, 246, 167);
 }
 
 .quiz {
@@ -188,10 +188,11 @@ body {
   display: block;
 }
 .quiz__wl-message.success {
-  background-color: rgb(138, 243, 162);
+  color: rgb(40, 40, 40);
+  background-color: rgb(143, 246, 167);
 }
 .quiz__wl-message.faliure {
-  background-color: rgb(245, 135, 145);
+  background-color: rgb(246, 152, 160);
 }
 
 /*# sourceMappingURL=style.css.map */

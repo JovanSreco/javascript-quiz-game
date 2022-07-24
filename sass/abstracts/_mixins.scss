@@ -8,8 +8,3 @@
 @mixin box-shadow {
     box-shadow: 0 1rem 2rem rgba($color-black-light, 0.2);
 }
-
-@mixin hide {
-    display: none;
-   
-}
