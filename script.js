@@ -131,11 +131,8 @@ function resetAllForNewGame(newGameBtnElement) {
     correctAnswer = ""
     questionNumberElement.textContent = `${questionNumber}/${MAX_QUESTIONS}`
     scoreElement.textContent = `${finalScore}/${MAX_SCORE}`
-    if(questionsSet) {
-        questionsSet.forEach(obj => {
-            questionsSet.delete(obj)
-        })
-    }
+    //Clear our set for next use
+    questionsSet.clear()
 }
 
 function removeClases() {
