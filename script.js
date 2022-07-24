@@ -13,12 +13,12 @@ const buttonAnswers = document.querySelectorAll("[data-button-answers]")
 const quizWlMessage = document.querySelector("[data-quiz-wl-message]")
 const btnNewGame = document.querySelector("[data-btn-new-game]")
 const btnNext = document.querySelector("[data-btn-next]")
-let questionNumber = 0
-let finalScore = 0
-let correctAnswer
 const questionsSet = new Set()
 // Setting up a iterator for the Set()
 let iteratorSet = questionsSet.values()
+let questionNumber = 0
+let finalScore = 0
+let correctAnswer
 
 //Flexible heading paragraph, max questions and scores.
 //If you want to change the MAX_QUESTIONS variable you must fetch another URL from https://opentdb.com/api_config.php
