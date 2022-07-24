@@ -7,4 +7,4 @@ MAX_SCORE can be changed in code and is flexible, but MAX_QUESTIONS  is dependen
 [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set), [Open Trivia DB](https://opentdb.com/api_config.php).
 
 ## Files
-Run command **npm install** in terminal if you wish to experiment with Sass
+Run command **npm install** in terminal if you wish to experiment with SASS
