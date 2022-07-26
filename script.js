@@ -1,7 +1,7 @@
 "use strict";
 const APIURL = "https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple";
 const MAX_QUESTIONS = 10;
-const MAX_SCORE = 5;
+const MAX_SCORE = 2;
 
 const containerQuiz = document.getElementById("container__quiz")
 const headingParagraph = document.querySelector("[data-heading-p]")
@@ -30,14 +30,14 @@ scoreElement.textContent = `${finalScore}/${MAX_SCORE}`
 btnNewGame.addEventListener("click", (e) => {
     newGame()
     resetAllForNewGame(e.target)
-    btnNextAddListener()
+    btnNext.addEventListener("click", btnNextFunc)
 })
 
-function btnNextAddListener() {
-    btnNext.addEventListener("click", () => {
-        // Start another iteration if all conditions have been meet and if the first round started
-        if(questionNumber && finalScore < MAX_SCORE) nextIteration()
-    })
+function btnNextFunc() {
+    // Start another iteration if all conditions have been meet and if the first round started
+    if(questionNumber && questionNumber <= MAX_QUESTIONS && finalScore < MAX_SCORE){
+        nextIteration()
+    }
 }
 
 // Everytime the new game starts a json filled is fetched and processed
@@ -72,7 +72,8 @@ function nextIteration() {
     }  else {
         questionNumber++;
         proceedWithIteration() 
-        parentListensButtons()
+        answersParent.removeEventListener("click", answerParentListensButtons, {once:true})
+        answersParent.addEventListener("click", answerParentListensButtons, {once:true})
     }
 }
 
@@ -94,36 +95,33 @@ function proceedWithIteration() {
     })
 }
 
-function parentListensButtons() {
-    // Use event delegation so that the user has just one chance to answer the question
-    answersParent.removeEventListener
-    answersParent.addEventListener("click", (e) => {
-        const answer = e.target.dataset.value
-        if (answer === correctAnswer){
-            //If answer is correct
-            finalScore++
-            scoreElement.innerHTML = `${finalScore}/${MAX_SCORE}`
-            if(questionNumber < MAX_QUESTIONS && finalScore < MAX_SCORE){
-                containerQuiz.classList.add("success")
-                quizWlMessage.classList.add("success")
-                quizWlMessage.innerHTML = "Correct!"
-            } else {
-                endGame()
-            }
+function answerParentListensButtons(e) {
+    const answer = e.target.dataset.value
+    if (answer === correctAnswer){
+        //If answer is correct
+        finalScore++
+        scoreElement.innerHTML = `${finalScore}/${MAX_SCORE}`
+        if(questionNumber < MAX_QUESTIONS && finalScore < MAX_SCORE){
+            containerQuiz.classList.add("success")
+            quizWlMessage.classList.add("success")
+            quizWlMessage.innerHTML = "Correct!"
         } else {
-            //If answer is incorrect
-            if(questionNumber < MAX_QUESTIONS && finalScore < MAX_SCORE){
-                containerQuiz.classList.add("faliure")
-                quizWlMessage.classList.add("faliure")
-                quizWlMessage.innerHTML = "Incorrect!"
-            } else {
-                endGame()
-            }
+            endGame()
         }
-    }, {once:true})
+    } else {
+        //If answer is incorrect
+        if(questionNumber < MAX_QUESTIONS && finalScore < MAX_SCORE){
+            containerQuiz.classList.add("faliure")
+            quizWlMessage.classList.add("faliure")
+            quizWlMessage.innerHTML = "Incorrect!"
+        } else {
+            endGame()
+        }
+    }
 }
 
 function endGame() {
+    //End game, either the player won or lost and remove event listener on next button to avoid eventListener duplication
     if(finalScore === MAX_SCORE) {
         containerQuiz.classList.add("success")
         quizWlMessage.classList.add("success")
@@ -133,7 +131,7 @@ function endGame() {
         quizWlMessage.classList.add("faliure")
         quizWlMessage.innerHTML = "You have lost, try again!"
     }
-    btnNext.removeEventListener
+    btnNext.removeEventListener("click", btnNextFunc) 
     btnNewGame.classList.remove("hide")
 }
 
