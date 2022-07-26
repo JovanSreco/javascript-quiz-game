@@ -44,7 +44,7 @@ function newGame() {
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }
-            response.json()})
+            return response.json()})
         .then(data => {
             // Apend object in the new set() for later use
             data.results.forEach( obj => {
@@ -57,7 +57,7 @@ function newGame() {
             nextIteration()
         })
         .catch(error => {
-            console.error(`Could not get products: ${error}`);
+            alert(`Could not get questions: ${error}`);
         })
 }
 
