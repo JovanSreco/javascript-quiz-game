@@ -40,7 +40,11 @@ btnNext.addEventListener("click", () => {
 // Everytime the new game starts a json filled is fetched and processed
 function newGame() {
     fetch(APIURL)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            response.json()})
         .then(data => {
             // Apend object in the new set() for later use
             data.results.forEach( obj => {
@@ -51,6 +55,9 @@ function newGame() {
                 })
             })
             nextIteration()
+        })
+        .catch(error => {
+            console.error(`Could not get products: ${error}`);
         })
 }
 
