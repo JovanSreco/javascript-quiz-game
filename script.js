@@ -28,14 +28,17 @@ questionNumberElement.textContent = `${questionNumber}/${MAX_QUESTIONS}`
 scoreElement.textContent = `${finalScore}/${MAX_SCORE}`
 
 btnNewGame.addEventListener("click", (e) => {
-    resetAllForNewGame(e.target)
     newGame()
+    resetAllForNewGame(e.target)
+    btnNextAddListener()
 })
 
-btnNext.addEventListener("click", () => {
-    // Start another iteration if all conditions have been meet and if the first round started
-    if(questionNumber && questionNumber < MAX_QUESTIONS && finalScore < MAX_SCORE) nextIteration()
-})
+function btnNextAddListener() {
+    btnNext.addEventListener("click", () => {
+        // Start another iteration if all conditions have been meet and if the first round started
+        if(questionNumber && finalScore < MAX_SCORE) nextIteration()
+    })
+}
 
 // Everytime the new game starts a json filled is fetched and processed
 function newGame() {
@@ -63,8 +66,17 @@ function newGame() {
 
 function nextIteration() {
     removeClases()
-    //Update the index of the current question
-    questionNumber++;
+    //If questions have exeded the MAX_QUESTIONS then end game else do the next question
+    if(questionNumber + 1 > MAX_QUESTIONS) {
+        endGame();
+    }  else {
+        questionNumber++;
+        proceedWithIteration() 
+        parentListensButtons()
+    }
+}
+
+function proceedWithIteration() {
     questionNumberElement.innerHTML = `${questionNumber}/${MAX_QUESTIONS}`
     //Use the iterator to access the next object, on first iterations it's the first object in set
     const initQuestion = iteratorSet.next().value
@@ -80,8 +92,6 @@ function nextIteration() {
         element.innerHTML = answersForAppending[index]
         element.dataset.value = answersForAppending[index]
     })
-    // Use event delegation so that the user has just one chance to answer the question
-    parentListensButtons()
 }
 
 function parentListensButtons() {
@@ -123,7 +133,7 @@ function endGame() {
         quizWlMessage.classList.add("faliure")
         quizWlMessage.innerHTML = "You have lost, try again!"
     }
-
+    btnNext.removeEventListener
     btnNewGame.classList.remove("hide")
 }
 
