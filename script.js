@@ -1,7 +1,7 @@
 "use strict";
 const APIURL = "https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple";
 const MAX_QUESTIONS = 10;
-const MAX_SCORE = 2;
+const MAX_SCORE = 5;
 
 const containerQuiz = document.getElementById("container__quiz")
 const headingParagraph = document.querySelector("[data-heading-p]")
