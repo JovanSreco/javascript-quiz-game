@@ -28,8 +28,8 @@ questionNumberElement.textContent = `${questionNumber}/${MAX_QUESTIONS}`
 scoreElement.textContent = `${finalScore}/${MAX_SCORE}`
 
 btnNewGame.addEventListener("click", (e) => {
-    newGame()
     resetAllForNewGame(e.target)
+    newGame()
     btnNext.addEventListener("click", btnNextFunc)
 })
 
@@ -70,7 +70,6 @@ function nextIteration() {
     if(questionNumber + 1 > MAX_QUESTIONS) {
         endGame();
     }  else {
-        questionNumber++;
         proceedWithIteration() 
         answersParent.removeEventListener("click", answerParentListensButtons, {once:true})
         answersParent.addEventListener("click", answerParentListensButtons, {once:true})
@@ -78,6 +77,7 @@ function nextIteration() {
 }
 
 function proceedWithIteration() {
+    questionNumber++;
     questionNumberElement.innerHTML = `${questionNumber}/${MAX_QUESTIONS}`
     //Use the iterator to access the next object, on first iterations it's the first object in set
     const initQuestion = iteratorSet.next().value
