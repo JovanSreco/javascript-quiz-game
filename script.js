@@ -30,14 +30,11 @@ scoreElement.textContent = `${finalScore}/${MAX_SCORE}`
 btnNewGame.addEventListener("click", (e) => {
     resetAllForNewGame(e.target)
     newGame()
-    btnNext.addEventListener("click", btnNextFunc)
 })
 
 function btnNextFunc() {
-    // Start another iteration if all conditions have been meet and if the first round started
-    if(questionNumber && questionNumber <= MAX_QUESTIONS && finalScore < MAX_SCORE){
-        nextIteration()
-    }
+    //Start iteration if questionNumber is not 0
+    if(questionNumber) nextIteration()
 }
 
 // Everytime the new game starts a json filled is fetched and processed
@@ -58,6 +55,7 @@ function newGame() {
                 })
             })
             nextIteration()
+            btnNext.addEventListener("click", btnNextFunc)
         })
         .catch(error => {
             alert(`Could not get questions: ${error}`);
@@ -71,7 +69,6 @@ function nextIteration() {
         endGame();
     }  else {
         proceedWithIteration() 
-        answersParent.removeEventListener("click", answerParentListensButtons, {once:true})
         answersParent.addEventListener("click", answerParentListensButtons, {once:true})
     }
 }
@@ -88,15 +85,23 @@ function proceedWithIteration() {
     const answersForAppending = [...initQuestion.incorrect]
     answersForAppending.splice(Math.floor(Math.random() * 5), 0, initQuestion.correct)
     //Take all answers elements and append answers
-    const btnAnswers = [...buttonAnswers]
-    btnAnswers.forEach( (element, index) => {
+    Array.from(buttonAnswers).forEach( (element, index) => {
         element.innerHTML = answersForAppending[index]
         element.dataset.value = answersForAppending[index]
     })
 }
 
 function answerParentListensButtons(e) {
-    const answer = e.target.dataset.value
+    let answer;
+    // Because the event delegation was used and the listener fires only once per click we have to asign a new listener 
+    // every time the user clicks whitespace beetwen the buttons or the letters for the answers
+    if(e.target.tagName === "BUTTON"){
+        answer = e.target.dataset.value
+    } else {
+        answersParent.addEventListener("click", answerParentListensButtons, {once:true})
+        return;
+    }
+
     if (answer === correctAnswer){
         //If answer is correct
         finalScore++
