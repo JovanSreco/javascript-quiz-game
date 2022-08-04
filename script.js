@@ -36,32 +36,32 @@ function btnNextFunc() {
     //Start iteration if questionNumber is not 0
     if(questionNumber) nextIteration()
 }
-
-// Everytime the new game starts a json filled is fetched and processed
-function newGame() {
-    fetch(APIURL)
+// Everytime the new game starts a JSON filled is fetched and processed
+function getRandomQuestions() {
+    return fetch(APIURL)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }
             return response.json()})
-        .then(data => {
-            // Apend object in the new set() for later use
-            data.results.forEach( obj => {
-                //Creating an object with no prototype to imitate key value pairs structure (new Map() can do this better)
-                const objectTemp = Object.create(null)
-                objectTemp.question = obj.question
-                objectTemp.correct = obj.correct_answer
-                objectTemp.incorrect = obj.incorrect_answers
-                questionsSet.add(objectTemp)
-            })
-            // Need to do the first iteration after the data has been colected
-            nextIteration()
-            btnNext.addEventListener("click", btnNextFunc)
-        })
-        .catch(error => {
-            alert(`Could not get questions: ${error}`);
-        })
+        .then(data => data.results) 
+        .catch(error => alert(`Could not get questions: ${error}`));
+}
+
+async function newGame() {
+    const questionsObj = await getRandomQuestions()
+    // Apend object in the new set() for later use
+    questionsObj.forEach( obj => {
+        //Creating an object with no prototype to imitate key value pairs structure (new Map() can do this better)
+        const objectTemp = Object.create(null)
+        objectTemp.question = obj.question
+        objectTemp.correct = obj.correct_answer
+        objectTemp.incorrect = obj.incorrect_answers
+        questionsSet.add(objectTemp)
+    })
+    // Need to do the first iteration after the data has been colected
+    nextIteration()
+    btnNext.addEventListener("click", btnNextFunc)
 }
 
 function nextIteration() {
@@ -164,4 +164,3 @@ function removeClases() {
     quizWlMessage.classList.remove("faliure")
     quizWlMessage.classList.remove("success")
 }
-
