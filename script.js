@@ -48,12 +48,14 @@ function newGame() {
         .then(data => {
             // Apend object in the new set() for later use
             data.results.forEach( obj => {
-                questionsSet.add({
-                    question: obj.question,
-                    correct: obj.correct_answer,
-                    incorrect: obj.incorrect_answers
-                })
+                //Creating an object with no prototype to imitate key value pairs structure (new Map() can do this better)
+                const objectTemp = Object.create(null)
+                objectTemp.question = obj.question
+                objectTemp.correct = obj.correct_answer
+                objectTemp.incorrect = obj.incorrect_answers
+                questionsSet.add(objectTemp)
             })
+            // Need to do the first iteration after the data has been colected
             nextIteration()
             btnNext.addEventListener("click", btnNextFunc)
         })
@@ -82,7 +84,7 @@ function proceedWithIteration() {
     correctAnswer = initQuestion.correct
     questionElement.innerHTML = initQuestion.question
     //Randomize order of the correct answer
-    const answersForAppending = [...initQuestion.incorrect]
+    const answersForAppending = initQuestion.incorrect
     answersForAppending.splice(Math.floor(Math.random() * 5), 0, initQuestion.correct)
     //Take all answers elements and append answers
     Array.from(buttonAnswers).forEach( (element, index) => {
@@ -93,8 +95,8 @@ function proceedWithIteration() {
 
 function answerParentListensButtons(e) {
     let answer;
-    // Because the event delegation was used and the listener fires only once per click we have to asign a new listener 
-    // every time the user clicks whitespace beetwen the buttons or the letters for the answers
+    // Because the event delegation was used and the listener fires only once we have to asign
+    // a new listener every time the user clicks whitespace between the buttons or the letters for the answers
     if(e.target.tagName === "BUTTON"){
         answer = e.target.dataset.value
     } else {
@@ -162,3 +164,4 @@ function removeClases() {
     quizWlMessage.classList.remove("faliure")
     quizWlMessage.classList.remove("success")
 }
+
